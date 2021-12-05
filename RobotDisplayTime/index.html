@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Animated entrance</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+  		function display_c(){
+  			var refresh=1000; // Refresh rate in milli seconds
+  			mytime=setTimeout('display_ct()',refresh);
+  		}
+	   	function display_ct() {
+  			var x = new Date();
+  			//var month_num = x.getMonth().toUTCString();
+  			var x2 =" - " + x.getDate() + "/" + x.getMonth()  + "/" + x.getYear(); 
+  			var x1 =" - " + x.getHours( )+ ":" +  x.getMinutes() + ":" +  x.getSeconds();
+  			//document.getElementById("MonthStr").innerHTML = month_num;
+  			document.getElementById('MainDate').innerHTML = x2;
+  			document.getElementById('MainTime').innerHTML = x1;
+  			display_c();
+      }
+  	</script>
+  </head>
+  <body onload="display_ct();">
+  	<section> 
+    <div class="card">
+        <div class="icon-space">
+          <img src="pink_robot.svg"/>
+        </div>
+        <div class="inner">
+          <div class="info">
+            <h2>Your Reservation is complete!</h2>
+            <p>Come meet the robots on <span id="MonthStr"></span> at: 
+            <div id="MainDate"></div> 
+            <div id="MainTime"></div>
+              We can't wait to see you there!</p>
+            <button>Make Another</button>
+          </div>
+        </div>
+    </div>
+  </section>
+  </body>
+</html>

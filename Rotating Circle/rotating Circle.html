@@ -1,0 +1,59 @@
+<div class="pre-loading">
+	<div class="vs-loading" style="transform: scale(1);">
+		<div class="effect-1 effects"></div>
+		<div class="effect-2 effects"></div>
+		<div class="effect-3 effects"></div>
+
+	</div>
+</div>
+<style>
+body{
+	background: #262c49;
+	position: absolute;	
+	top:50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+.pre-loading .vs-loading {
+    position: relative;
+    width: 55px;
+    height: 55px;
+    display: block;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 3px solid transparent;
+    }
+.pre-loading .vs-loading .effect-1, .pre-loading .vs-loading .effect-2, .pre-loading .vs-loading .effect-3 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+.pre-loading .vs-loading .effect-3{
+    border-left: 3px solid #271;
+    animation: rotateOpacity 1s ease .2s infinite;
+}
+.pre-loading .vs-loading .effect-1{
+	border-left: 3px solid #262;
+    animation: rotateOpacity 1s ease infinite;
+}
+.pre-loading .vs-loading .effect-2{
+    border-left: 3px solid #262;
+    animation: rotateOpacity 1s ease .1s infinite;
+}
+.pre-loading .vs-loading .effects {
+    transition: all .3s ease;
+}
+@keyframes rotateOpacity{
+	0%{
+		transform:rotate(0deg);
+		opacity:.1
+	}
+	to{
+		transform:rotate(1turn);
+		opacity:1
+	}
+}
+
+</style>

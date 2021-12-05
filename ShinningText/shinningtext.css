@@ -1,0 +1,33 @@
+*,*::before,*::after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: black;
+}
+.goodies{
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 2em;
+    overflow: hidden;
+    white-space: nowrap;
+    background: linear-gradient(to right, black,white,black);
+    background-size: 80%;
+    -webkit-background-clip: text;
+    background-repeat: no-repeat;
+    color: transparent;
+    animation: animate 3s linear infinite;
+}
+@keyframes animate {
+    0%{
+        background-position: -500%;
+}
+    100%{
+        background-position: 500%;
+    }
+}

@@ -1,0 +1,207 @@
+// Variables
+$main-background:linear-gradient(to right bottom, #262c49 12%,#222c49 62%);
+$clr-white:#fff;
+$Valueas100:100%;
+$zeroValue:0;
+$translateTo50:translate(-50%, -50%);
+$component-pix:(
+	"val120":(120px),
+	"val58":(58px)
+);
+$positionMap:(
+	"absolute":(absolute),
+	"fixed":(fixed):
+	"relative":(relative)
+);
+$keyframesPercent:0%,25%,50%,75%,100%;
+
+// Mixins
+@mixin transform-main($translateValue){
+  -webkit-transform: $translateValue;
+  -ms-transform: $translateValue;
+  -o-transform: $translateValue;
+  transform: $translateValue;
+}
+@mixin delay-block($delay-value,$pixels-left,$pixels-top){
+  animation-delay: $delay-value;
+  -o-animation-delay: $delay-value;
+  -ms-animation-delay: $delay-value;
+  -webkit-animation-delay: $delay-value;
+  -moz-animation-delay: $delay-value;
+  left:$pixels-left;
+  top:$pixels-top;
+}
+@mixin animations($ani-value){
+  animation: $ani-value;
+  -o-animation: $ani-value;
+  -ms-animation: $ani-value;
+  -webkit-animation: $ani-value;
+  -moz-animation: $ani-value;
+}
+@mixin animationProperties($val1,$val2){
+  	opacity: $val1;
+    -webkit-transform: translateY($val2);
+    -o-transform: translateY($val2);
+    transform: translateY($val2);
+}
+@mixin opacity($v){
+	opacity: $v;
+    -webkit-opacity:$v;
+}
+.loader{
+  	position: map_get($positionMap,'fixed');
+  	bottom: $zeroValue;
+  	left: $zeroValue;
+  	right: $zeroValue;
+  	top: $zeroValue;
+  	height: $Valueas100;
+  	width: $Valueas100;
+  	z-index: 100*10 + 11;
+  	overflow-x:hidden;
+  	background: -moz-$main-background;
+  	background: -webkit-$main-background;
+  	background: $main-background;
+  	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#279208', endColorstr='#87c534',GradientType=1 );
+    span {
+      	background: $clr-white;
+        -webkit-border-radius: $Valueas100/2;
+      	border-radius: $Valueas100/2;
+      	display: block;
+      	position:  map_get($positionMap,'absolute');
+      	opacity: $zeroValue;
+      	height: 12px;
+      	width: 12px;
+      	@include animations(load 4.6s ease-in-out infinite);
+  }
+}
+.loader-inner {
+  	border: 12px solid #065;
+  	position:  map_get($positionMap,'absolute');
+  	border-radius: $Valueas100/2;
+  	left: $Valueas100/2;
+  	top: $Valueas100/2;
+  	@include transform-main($translateTo50);
+    img {
+      	width: map_get($component-pix,"val120");;
+      	max-width: map_get($component-pix,"val120");
+      	display: inline-block;
+    }
+}
+.loader-blocks {
+	height: map_get($component-pix,"val58");;
+	width: map_get($component-pix,"val58");;
+}
+
+$delay-value:("0":1.06s,"1":0.97s,"2":0.87s,"3":0.78s,"4":0.69s,"5":0.6s,"6":0.51s,"7":0.41s,"8":0.32s,"9":0.23s,
+              "10":0.14s,"11":0.05s,"12":-0.05s,"13":-0.14s,"14":-0.23s,"15":-0.32s);
+$pixels-left:("0":0px,"1":16px,"2":31px,"3":47px,"4":0px,"5":16px,"6":31px,"7":47px,
+              "8":0px,"9":16px,"10":31px,"11":47px,"12":0px,"13":16px,"14": 31px,"15":47px);
+$pixels-top:("0":0px,"1":0px,"2":0px,"3":0px,"4":16px,"5":16px,"6":16px,"7":16px,"8":31px,"9":31px,
+              "10":31px,"11":31px,"12":47px,"13":47px,"14":47px,"15":47px);
+@for $i from 0 to 16 {
+  .block-#{$i}{
+    // or we can use this as
+    @include delay-block(map-get($delay-value,#{$i}),map-get($pixels-left,#{$i}),map-get($pixels-top,#{$i}) );
+  }
+}
+
+@keyframes load {
+  0% {
+    @include animationProperties(0,97px);
+    
+    }
+  15% {
+    @include animationProperties(0,-97px);
+    
+    }
+  30% {
+    @include animationProperties(1,0);
+    
+    }
+  70% {
+    @include animationProperties(1,0);
+    
+    }
+  85% {
+    @include animationProperties(0,97px);
+    
+    }
+  100% {
+    @include animationProperties(0,97px);
+    
+    }
+}
+
+@keyframes blink {
+    @each $p in $keyframesPercent {
+    	#{$p}{
+    		@include opacity($p)
+    	}
+    }
+}
+
+
+/*
+Generated Output = 
+for function will produce output as shown below
+.block-0{
+  @include delay-block(1.06s,0px,0px);
+}
+.block-1{
+  @include delay-block(0.97s,16px,0px);
+}
+
+.block-2{
+  @include delay-block(0.87s,31px,0px);
+}
+.block-3{
+  @include delay-block(0.78s,47px,0px);
+}
+.block-4{
+  @include delay-block(0.69s,0px,16px);
+}
+.block-5{
+  @include delay-block(0.6s,16px,16px);
+}
+.block-6{
+  @include delay-block(0.51s,31px,16px);
+}
+.block-7{
+  @include delay-block(0.41s,47px,16px);
+}
+.block-8{
+  @include delay-block(0.32s,0px,31px);
+}
+.block-9{
+  @include delay-block(0.23s,16px,31px);
+}
+.block-10{
+  @include delay-block(0.14s,31px,31px);
+}
+.block-11{
+  @include delay-block(0.05s,47px,31px);
+}
+.block-12{
+  @include delay-block((-0.05s),0px,47px);
+}
+.block-13{
+  @include delay-block((-0.14s),16px,47px);
+}
+.block-14{
+  @include delay-block((-0.23s),31px,47px);
+}
+.block-15{
+  @include delay-block((-0.32s),47px,47px);
+}
+
+final output will be 
+.block-0{
+   animation-delay: 1.06s;
+  -o-animation-delay: 1.06s;
+  -ms-animation-delay: 1.06s;
+  -webkit-animation-delay: 1.06s;
+  -moz-animation-delay: 1.06s;
+  left: 0px;
+  top: 0px; }
+}
+*/
